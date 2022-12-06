@@ -1,11 +1,9 @@
 val source = io.Source.fromFile("6.txt")
 val lines = source.getLines.mkString.toList
-// j = 4 and while loop checks != 4 for pt1, current code is pt2
-var i = 0 // failure
-var j = 14 // is what i am
 
-while (lines.slice(i, j).distinct.size != 14) {
-	i+=1
-	j+=1
+def getConsecUnique(lines: List[Char], chunk: Int) = {
+	lines.sliding(chunk,1).map(_.distinct).zipWithIndex.find(_._1.size == chunk).map(_._2).get + chunk
 }
-println(j)
+
+println(getConsecUnique(lines, 4)) // pt1
+println(getConsecUnique(lines, 14))// pt2
